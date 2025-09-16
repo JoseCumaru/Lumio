@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varejo Moderno - Sua Loja Online</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Estilo customizado para a fonte Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Efeito de scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Animação de fade-in no scroll */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Cabeçalho -->
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold text-gray-900 tracking-wider">
+                MODERNO
+            </a>
+
+            <!-- Navegação para Desktop -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Home</a>
+                <a href="#produtos" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Produtos</a>
+                <a href="#ofertas" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Ofertas</a>
+                <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Contato</a>
+            </div>
+
+            <!-- Ícones -->
+            <div class="flex items-center space-x-5">
+                <button class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </button>
+                <button class="relative text-gray-600 hover:text-indigo-600 transition-colors duration-300">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </button>
+                <!-- Botão de Menu Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600">Home</a>
+            <a href="#produtos" class="block py-2 text-gray-600 hover:text-indigo-600">Produtos</a>
+            <a href="#ofertas" class="block py-2 text-gray-600 hover:text-indigo-600">Ofertas</a>
+            <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600">Contato</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Hero -->
+        <section class="relative h-[80vh] min-h-[500px] bg-cover bg-center text-white" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative container mx-auto px-6 h-full flex flex-col justify-center items-start">
+                <div class="max-w-lg">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg">Coleção Verão 2024</h1>
+                    <p class="mt-4 text-lg md:text-xl drop-shadow-md">Descubra as últimas tendências e renove seu estilo com peças incríveis.</p>
+                    <a href="#produtos" class="mt-8 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        Ver Coleção
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Categorias -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-2 scroll-animate">Navegue por Categorias</h2>
+                <p class="text-gray-600 mb-12 scroll-animate">Encontre exatamente o que você procura.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Categoria 1 -->
+                    <div class="relative group overflow-hidden rounded-lg shadow-lg scroll-animate">
+                        <img src="https://images.unsplash.com/photo-1585487005169-2c3599a0f9b3?q=80&w=1887&auto=format&fit=crop" alt="Roupas Femininas" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <h3 class="text-white text-2xl font-bold drop-shadow-lg">Feminino</h3>
+                        </div>
+                    </div>
+                    <!-- Categoria 2 -->
+                    <div class="relative group overflow-hidden rounded-lg shadow-lg scroll-animate" style="transition-delay: 100ms;">
+                        <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?q=80&w=1887&auto=format&fit=crop" alt="Roupas Masculinas" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <h3 class="text-white text-2xl font-bold drop-shadow-lg">Masculino</h3>
+                        </div>
+                    </div>
+                    <!-- Categoria 3 -->
+                    <div class="relative group overflow-hidden rounded-lg shadow-lg scroll-animate" style="transition-delay: 200ms;">
+                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1898&auto=format&fit=crop" alt="Calçados" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <h3 class="text-white text-2xl font-bold drop-shadow-lg">Calçados</h3>
+                        </div>
+                    </div>
+                    <!-- Categoria 4 -->
+                    <div class="relative group overflow-hidden rounded-lg shadow-lg scroll-animate" style="transition-delay: 300ms;">
+                        <img src="https://images.unsplash.com/photo-1590779233251-a1d89b35f299?q=80&w=1887&auto=format&fit=crop" alt="Acessórios" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <h3 class="text-white text-2xl font-bold drop-shadow-lg">Acessórios</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Produtos em Destaque -->
+        <section id="produtos" class="py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-2 scroll-animate">Produtos em Destaque</h2>
+                <p class="text-gray-600 text-center mb-12 scroll-animate">Os mais vendidos e amados pelos nossos clientes.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Produto 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group scroll-animate">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop" alt="Produto 1" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold transform hover:scale-105 transition-transform duration-300">Adicionar ao Carrinho</button>
+                            </div>
+                            <span class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">-20%</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg">Relógio Clássico</h3>
+                            <div class="flex items-baseline mt-2">
+                                <p class="text-xl font-bold text-indigo-600">R$ 199,90</p>
+                                <p class="text-sm text-gray-500 line-through ml-2">R$ 249,90</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Produto 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group scroll-animate" style="transition-delay: 100ms;">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" alt="Produto 2" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold transform hover:scale-105 transition-transform duration-300">Adicionar ao Carrinho</button>
+                            </div>
+                            <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg">Tênis Esportivo</h3>
+                            <p class="text-xl font-bold text-indigo-600 mt-2">R$ 349,90</p>
+                        </div>
+                    </div>
+                    <!-- Produto 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group scroll-animate" style="transition-delay: 200ms;">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" alt="Produto 3" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold transform hover:scale-105 transition-transform duration-300">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg">Headphone Premium</h3>
+                            <p class="text-xl font-bold text-indigo-600 mt-2">R$ 599,90</p>
+                        </div>
+                    </div>
+                    <!-- Produto 4 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group scroll-animate" style="transition-delay: 300ms;">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop" alt="Produto 4" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold transform hover:scale-105 transition-transform duration-300">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold text-lg">Óculos de Sol</h3>
+                            <p class="text-xl font-bold text-indigo-600 mt-2">R$ 149,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Oferta com Countdown -->
+        <section id="ofertas" class="bg-indigo-700 text-white">
+            <div class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-center md:text-left scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold">Oferta Relâmpago!</h2>
+                    <p class="mt-2 text-lg text-indigo-200">Até 40% de desconto em itens selecionados. Não perca!</p>
+                </div>
+                <div id="countdown" class="flex space-x-4 text-center scroll-animate">
+                    <div>
+                        <span id="days" class="text-4xl font-bold">00</span>
+                        <span class="block text-sm text-indigo-200">Dias</span>
+                    </div>
+                    <div>
+                        <span id="hours" class="text-4xl font-bold">00</span>
+                        <span class="block text-sm text-indigo-200">Horas</span>
+                    </div>
+                    <div>
+                        <span id="minutes" class="text-4xl font-bold">00</span>
+                        <span class="block text-sm text-indigo-200">Minutos</span>
+                    </div>
+                    <div>
+                        <span id="seconds" class="text-4xl font-bold">00</span>
+                        <span class="block text-sm text-indigo-200">Segundos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Newsletter -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <i data-lucide="mail-check" class="mx-auto h-12 w-12 text-indigo-600 scroll-animate"></i>
+                    <h2 class="text-3xl font-bold mt-4 mb-2 scroll-animate">Junte-se à nossa comunidade</h2>
+                    <p class="text-gray-600 mb-8 scroll-animate">Receba ofertas exclusivas, novidades e dicas de estilo diretamente no seu e-mail.</p>
+                    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto scroll-animate">
+                        <input type="email" placeholder="Seu melhor e-mail" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                        <button type="submit" class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg shadow-md transform hover:scale-105 transition-all duration-300">
+                            Inscrever
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Sobre -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MODERNO</h3>
+                    <p class="text-gray-400">Sua loja online com as melhores tendências de moda e estilo.</p>
+                </div>
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="font-semibold mb-4">Institucional</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Sobre Nós</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <!-- Ajuda -->
+                <div>
+                    <h4 class="font-semibold mb-4">Ajuda</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Envios e Devoluções</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Fale Conosco</a></li>
+                    </ul>
+                </div>
+                <!-- Redes Sociais -->
+                <div>
+                    <h4 class="font-semibold mb-4">Siga-nos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2024 Varejo Moderno. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Inicializa os ícones Lucide
+        lucide.createIcons();
+
+        // Lógica do Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lógica do Countdown
+        const countdownDate = new Date().setDate(new Date().getDate() + 3); // Oferta termina em 3 dias
+
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById('countdown').innerHTML = "<div class='text-xl font-bold'>Oferta Encerrada!</div>";
+            }
+        }, 1000);
+
+        // Lógica para animação de scroll
+        const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        scrollAnimateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "categories": [
+    {
+      "id": "feminino",
+      "name": "Feminino",
+      "description": "Roupas e acessórios femininos da última moda",
+      "image": "https://images.unsplash.com/photo-1585487005169-2c3599a0f9b3?q=80&w=1887&auto=format&fit=crop",
+      "alt": "Roupas femininas elegantes",
+      "featured": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "masculino",
+      "name": "Masculino",
+      "description": "Estilo e conforto para o homem moderno",
+      "image": "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?q=80&w=1887&auto=format&fit=crop",
+      "alt": "Roupas masculinas modernas",
+      "featured": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "calcados",
+      "name": "Calçados",
+      "description": "Sapatos, tênis e sandálias para todos os estilos",
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1898&auto=format&fit=crop",
+      "alt": "Variedade de calçados",
+      "featured": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "acessorios",
+      "name": "Acessórios",
+      "description": "Complemente seu look com nossos acessórios",
+      "image": "https://images.unsplash.com/photo-1590779233251-a1d89b35f299?q=80&w=1887&auto=format&fit=crop",
+      "alt": "Acessórios de moda",
+      "featured": true,
+      "sortOrder": 4
+    },
+    {
+      "id": "eletronicos",
+      "name": "Eletrônicos",
+      "description": "Gadgets e tecnologia para o seu dia a dia",
+      "image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=2070&auto=format&fit=crop",
+      "alt": "Eletrônicos modernos",
+      "featured": false,
+      "sortOrder": 5
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "site": {
+    "name": "Lumio",
+    "tagline": "Sua Loja Online",
+    "description": "Descubra as últimas tendências de moda e estilo com qualidade e preços incríveis",
+    "url": "https://lumio.com.br",
+    "email": "contato@lumio.com",
+    "phone": "(11) 9999-9999",
+    "address": "São Paulo, SP",
+    "social": {
+      "facebook": "https://facebook.com/lumio",
+      "instagram": "https://instagram.com/lumio",
+      "twitter": "https://twitter.com/lumio"
+    }
+  },
+  "hero": {
+    "title": "Coleção Verão 2024",
+    "subtitle": "Descubra as últimas tendências e renove seu estilo com peças incríveis.",
+    "ctaText": "Ver Coleção",
+    "ctaLink": "#produtos",
+    "backgroundImage": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "url": "#",
+      "active": true
+    },
+    {
+      "label": "Produtos",
+      "url": "#produtos",
+      "active": false
+    },
+    {
+      "label": "Ofertas",
+      "url": "#ofertas",
+      "active": false
+    },
+    {
+      "label": "Contato",
+      "url": "#contato",
+      "active": false
+    }
+  ],
+  "footer": {
+    "sections": [
+      {
+        "title": "Institucional",
+        "links": [
+          { "label": "Sobre Nós", "url": "/sobre" },
+          { "label": "Política de Privacidade", "url": "/privacidade" },
+          { "label": "Termos de Uso", "url": "/termos" },
+          { "label": "Trabalhe Conosco", "url": "/carreiras" }
+        ]
+      },
+      {
+        "title": "Ajuda",
+        "links": [
+          { "label": "FAQ", "url": "/faq" },
+          { "label": "Envios e Devoluções", "url": "/envios" },
+          { "label": "Fale Conosco", "url": "/contato" },
+          { "label": "Suporte", "url": "/suporte" }
+        ]
+      }
+    ]
+  },
+  "offers": {
+    "title": "Oferta Relâmpago!",
+    "description": "Até 40% de desconto em itens selecionados. Não perca!",
+    "endDate": null,
+    "durationDays": 3
+  },
+  "newsletter": {
+    "title": "Junte-se à nossa comunidade",
+    "description": "Receba ofertas exclusivas, novidades e dicas de estilo diretamente no seu e-mail.",
+    "placeholder": "Seu melhor e-mail",
+    "buttonText": "Inscrever",
+    "enabled": true
+  },
+  "animations": {
+    "enabled": true,
+    "scrollThreshold": 0.1,
+    "staggerDelay": 100
+  },
+  "cart": {
+    "enabled": true,
+    "initialCount": 3,
+    "storageKey": "varejo_cart"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Relógio Clássico",
+      "category": "acessorios",
+      "price": 19990,
+      "originalPrice": 24990,
+      "discount": 20,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop",
+      "alt": "Relógio Clássico de pulso",
+      "description": "Relógio elegante e atemporal para todas as ocasiões",
+      "isNew": false,
+      "isFeatured": true,
+      "stock": 15,
+      "tags": ["relógio", "clássico", "elegante"]
+    },
+    {
+      "id": 2,
+      "name": "Tênis Esportivo",
+      "category": "calcados",
+      "price": 34990,
+      "originalPrice": null,
+      "discount": 0,
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
+      "alt": "Tênis esportivo para corrida",
+      "description": "Tênis de alta performance para suas atividades físicas",
+      "isNew": true,
+      "isFeatured": true,
+      "stock": 23,
+      "tags": ["tênis", "esportivo", "corrida"]
+    },
+    {
+      "id": 3,
+      "name": "Headphone Premium",
+      "category": "eletronicos",
+      "price": 59990,
+      "originalPrice": null,
+      "discount": 0,
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop",
+      "alt": "Headphone premium com cancelamento de ruído",
+      "description": "Áudio de qualidade profissional com cancelamento de ruído",
+      "isNew": false,
+      "isFeatured": true,
+      "stock": 8,
+      "tags": ["headphone", "áudio", "premium"]
+    },
+    {
+      "id": 4,
+      "name": "Óculos de Sol",
+      "category": "acessorios",
+      "price": 14990,
+      "originalPrice": null,
+      "discount": 0,
+      "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop",
+      "alt": "Óculos de sol polarizado",
+      "description": "Proteção UV com estilo moderno e sofisticado",
+      "isNew": false,
+      "isFeatured": true,
+      "stock": 12,
+      "tags": ["óculos", "proteção", "estilo"]
+    }
+  ]
+}

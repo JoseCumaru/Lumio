@@ -1,0 +1,70 @@
+{
+  "name": "lumio",
+  "version": "1.0.0",
+  "description": "Loja online moderna e responsiva com design elegante",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --host=localhost --open=/ --watch=.",
+    "build": "npm run build:css && npm run build:js && npm run build:html",
+    "build:css": "npm run concat:css && npm run minify:css",
+    "build:js": "npm run concat:js && npm run minify:js", 
+    "build:html": "npm run minify:html",
+    "concat:css": "cat assets/css/main.css assets/css/components.css assets/css/responsive.css > dist/assets/css/styles.css",
+    "concat:js": "cat assets/js/menu.js assets/js/countdown.js assets/js/animations.js assets/js/main.js > dist/assets/js/app.js",
+    "minify:css": "cleancss -o dist/assets/css/styles.min.css dist/assets/css/styles.css",
+    "minify:js": "terser dist/assets/js/app.js -o dist/assets/js/app.min.js --compress --mangle",
+    "minify:html": "html-minifier --input-dir . --output-dir dist --file-ext html --collapse-whitespace --remove-comments --minify-css --minify-js",
+    "watch": "concurrently \"npm run watch:css\" \"npm run watch:js\" \"npm run start\"",
+    "watch:css": "nodemon --watch assets/css --ext css --exec \"npm run build:css\"",
+    "watch:js": "nodemon --watch assets/js --ext js --exec \"npm run build:js\"",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean && mkdir -p dist/assets/css dist/assets/js dist/assets/images",
+    "copy:assets": "cp -r assets/images/* dist/assets/images/ && cp -r config dist/",
+    "deploy": "npm run build && npm run copy:assets",
+    "lint": "eslint assets/js/**/*.js",
+    "format": "prettier --write \"**/*.{js,css,html,json}\"",
+    "test": "echo \"Tests not implemented yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseCumaru/lumio.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "loja-online",
+    "varejo",
+    "responsive",
+    "tailwindcss",
+    "javascript",
+    "html5",
+    "css3"
+  ],
+  "author": "Jose Cumaru Neto <josecumaru18@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoseCumaru/lumio/issues"
+  },
+  "homepage": "https://github.com/JoseCumaru/lumio#readme",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "html-minifier": "^4.0.0",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "terser": "^5.26.0"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

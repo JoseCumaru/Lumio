@@ -1,0 +1,206 @@
+/* Media queries e estilos responsivos */
+
+/* Breakpoints customizados */
+/* sm: 640px */
+/* md: 768px */
+/* lg: 1024px */
+/* xl: 1280px */
+/* 2xl: 1536px */
+
+/* Mobile First - Estilos base para dispositivos móveis */
+@media (max-width: 639px) {
+    /* Container padding reduzido em mobile */
+    .container-mobile {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Tipografia responsiva */
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    /* Layout de produtos em uma coluna em mobile */
+    .products-grid-mobile {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Categories grid ajustado para mobile */
+    .categories-grid-mobile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    /* Navbar mobile */
+    .navbar-mobile {
+        padding: 1rem;
+    }
+    
+    /* Countdown responsivo */
+    .countdown-mobile {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .countdown-item-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+/* Tablet - Estilos para tablets */
+@media (min-width: 640px) and (max-width: 1023px) {
+    /* Grid de produtos em 2 colunas */
+    .products-grid-tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Categories em 2x2 */
+    .categories-grid-tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    /* Hero section ajustado */
+    .hero-tablet {
+        min-height: 60vh;
+    }
+    
+    /* Footer em grid */
+    .footer-grid-tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Desktop - Estilos para desktop */
+@media (min-width: 1024px) {
+    /* Container com largura máxima */
+    .container-desktop {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    /* Grid de produtos em 4 colunas */
+    .products-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Categories em linha */
+    .categories-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Navigation horizontal */
+    .nav-desktop {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    /* Hero section com altura completa */
+    .hero-desktop {
+        min-height: 80vh;
+    }
+    
+    /* Footer em grid de 4 colunas */
+    .footer-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+    }
+}
+
+/* Large Desktop - Estilos para telas grandes */
+@media (min-width: 1280px) {
+    /* Container ainda maior */
+    .container-xl {
+        max-width: 1400px;
+    }
+    
+    /* Espaçamento aumentado */
+    .section-padding-xl {
+        padding: 6rem 0;
+    }
+    
+    /* Produtos com gap maior */
+    .products-grid-xl {
+        gap: 3rem;
+    }
+}
+
+/* Orientação landscape para tablets */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .hero-landscape {
+        min-height: 50vh;
+    }
+    
+    .categories-grid-landscape {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Altura mínima para dispositivos muito baixos */
+@media (max-height: 600px) {
+    .hero-short {
+        min-height: 400px;
+    }
+    
+    .section-padding-short {
+        padding: 3rem 0;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Reduce motion para usuários que preferem menos animações */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .scroll-animate {
+        opacity: 1;
+        transform: none;
+    }
+}
