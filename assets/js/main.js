@@ -1,6 +1,27 @@
 /**
  * Main Application Controller
- * Arquivo principal que inicializa todos os módulos da aplicação
+ * Arquivo principal que iniciali    async initializeApp() {
+        console.log('🚀 Inicializando Lumio...');
+        
+        try {
+            await this.loadComponents();
+            
+            // Aguardar um pequeno delay para garantir que o DOM seja atualizado
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            // Segunda inicialização dos ícones para garantir
+            this.initializeLucideIcons();
+            this.initializeModules();
+            this.setupEventListeners();
+            this.setupNewsletterForm();
+            this.setupProductInteractions();
+            this.setupSmoothScrolling();
+            
+            console.log('✅ Aplicação inicializada com sucesso!');
+        } catch (error) {
+            console.error('❌ Erro ao inicializar aplicação:', error);
+        }
+    }os da aplicação
  */
 
 class LumioApp {
@@ -30,12 +51,98 @@ class LumioApp {
         } else {
             this.initializeApp();
         }
+        
+        // Garantir que todos os recursos estejam carregados
+        if (document.readyState !== 'complete') {
+            window.addEventListener('load', () => {
+                // Aguardar um pouco mais para garantir que tudo esteja pronto
+                setTimeout(() => {
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                        console.log('🔄 Ícones Lucide re-inicializados após load completo');
+                    }
+                }, 500);
+            });
+        }
     }
     
-    initializeApp() {
+    async loadComponents() {
+        console.log('📦 Carregando componentes...');
+        
+        const components = [
+            { id: 'header-placeholder', file: 'header.html' },
+            { id: 'hero-placeholder', file: 'hero.html' },
+            { id: 'categories-placeholder', file: 'categories.html' },
+            { id: 'products-placeholder', file: 'products.html' },
+            { id: 'offers-placeholder', file: 'offers.html' },
+            { id: 'newsletter-placeholder', file: 'newsletter.html' },
+            { id: 'footer-placeholder', file: 'footer.html' }
+        ];
+        
+        try {
+            // Carregar todos os componentes sequencialmente para evitar problemas
+            console.log('🔍 Iniciando carregamento sequencial de componentes...');
+            
+            for (let i = 0; i < components.length; i++) {
+                const component = components[i];
+                console.log(`🔄 Tentando carregar componente ${i + 1}/${components.length}: ${component.file}`);
+                
+                const element = document.getElementById(component.id);
+                if (element) {
+                    console.log(`✓ Elemento ${component.id} encontrado`);
+                    try {
+                        const response = await fetch(`components/${component.file}`);
+                        console.log(`📡 Resposta do fetch para ${component.file}:`, response.status);
+                        
+                        if (response.ok) {
+                            const html = await response.text();
+                            element.innerHTML = html;
+                            console.log(`✅ Componente ${component.file} carregado com sucesso`);
+                            
+                            // Aguardar um pequeno delay entre componentes
+                            await new Promise(resolve => setTimeout(resolve, 50));
+                        } else {
+                            console.warn(`⚠️ Não foi possível carregar ${component.file} (Status: ${response.status})`);
+                        }
+                    } catch (error) {
+                        console.error(`❌ Erro ao carregar ${component.file}:`, error);
+                    }
+                } else {
+                    console.error(`❌ Elemento ${component.id} NÃO encontrado no DOM`);
+                }
+            }
+            
+            console.log('📦 Todos os componentes foram carregados');
+            
+            // Aguardar um momento para o DOM ser atualizado
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Inicializar ícones Lucide após carregar todos os componentes
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+                console.log('🎨 Ícones Lucide inicializados após carregamento dos componentes');
+            }
+            
+            // Forçar aplicação de estilos CSS se necessário
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // trigger reflow
+            document.body.style.display = '';
+            
+        } catch (error) {
+            console.error('❌ Erro ao carregar componentes:', error);
+        }
+    }
+    
+    async initializeApp() {
         console.log('🚀 Inicializando Lumio...');
         
         try {
+            await this.loadComponents();
+            
+            // Aguardar um pequeno delay para garantir que o DOM seja atualizado
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            // Segunda inicialização dos ícones para garantir
             this.initializeLucideIcons();
             this.initializeModules();
             this.setupEventListeners();
