@@ -1,51 +1,10 @@
 # 🛍️ Lumio - Loja Online
 
-Uma loja online moderna, responsiva e escalável construída com HTML5, CSS3, JavaScript vanilla e Tailwind CSS.
+Uma loja online moderna e responsiva construída com HTML5, CSS3, JavaScript vanilla e Tailwind CSS.
 
 ![Lumio](https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop)
 
-## ✨ Características
 
-- 📱 **Design Responsivo**: Otimizado para desktop, tablet e mobile
-- 🎨 **Interface Moderna**: Design elegante com Tailwind CSS
-- 🚀 **Performance**: JavaScript vanilla modular para máxima performance  
-- 🔧 **Escalável**: Arquitetura modular e componentizada
-- 📦 **Build System**: Scripts automatizados para desenvolvimento e produção
-- 🎯 **Acessibilidade**: Implementado com boas práticas de A11y
-- ⚡ **Animações Suaves**: Efeitos visuais otimizados com Intersection Observer
-
-## 🏗️ Estrutura do Projeto
-
-```
-lumio/
-├── assets/
-│   ├── css/
-│   │   ├── main.css          # Estilos principais
-│   │   ├── components.css    # Estilos de componentes
-│   │   └── responsive.css    # Media queries
-│   ├── js/
-│   │   ├── main.js          # Controlador principal
-│   │   ├── menu.js          # Gerenciador do menu mobile
-│   │   ├── countdown.js     # Timer de ofertas
-│   │   └── animations.js    # Animações de scroll
-│   └── images/              # Imagens do projeto
-├── components/
-│   ├── header.html          # Cabeçalho e navegação
-│   ├── hero.html            # Seção hero principal
-│   ├── categories.html      # Grid de categorias
-│   ├── products.html        # Lista de produtos
-│   ├── offers.html          # Seção de ofertas
-│   ├── newsletter.html      # Formulário de newsletter
-│   └── footer.html          # Rodapé
-├── config/
-│   ├── site.json           # Configurações gerais
-│   ├── products.json       # Dados dos produtos
-│   └── categories.json     # Dados das categorias
-├── dist/                   # Build de produção (gerado)
-├── index.html             # Página principal
-├── package.json           # Dependências e scripts
-└── README.md              # Este arquivo
-```
 
 ## 🚀 Instalação e Uso
 
