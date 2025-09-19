@@ -71,11 +71,7 @@ class LumioApp {
         
         const components = [
             { id: 'header-placeholder', file: 'header.html' },
-            { id: 'hero-placeholder', file: 'hero.html' },
-            { id: 'categories-placeholder', file: 'categories.html' },
-            { id: 'products-placeholder', file: 'products.html' },
-            { id: 'offers-placeholder', file: 'offers.html' },
-            { id: 'newsletter-placeholder', file: 'newsletter.html' },
+            { id: 'product-modal-placeholder', file: 'product-modal.html' },
             { id: 'footer-placeholder', file: 'footer.html' }
         ];
         
@@ -123,6 +119,9 @@ class LumioApp {
                 console.log('🎨 Ícones Lucide inicializados após carregamento dos componentes');
             }
             
+            // Configurar modal de produto
+            this.setupProductModal();
+            
             // Forçar aplicação de estilos CSS se necessário
             document.body.style.display = 'none';
             document.body.offsetHeight; // trigger reflow
@@ -150,12 +149,18 @@ class LumioApp {
             this.setupProductInteractions();
             this.setupSmoothScrolling();
             
+            // Inicializar router após tudo estar pronto
+            if (typeof Router !== 'undefined') {
+                this.router = new Router();
+                console.log('📍 Router inicializado');
+            }
+            
             console.log('✅ Aplicação inicializada com sucesso!');
         } catch (error) {
             console.error('❌ Erro ao inicializar aplicação:', error);
         }
     }
-    
+
     initializeLucideIcons() {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -246,6 +251,185 @@ class LumioApp {
                 }
             });
         });
+    }
+    
+    setupProductModal() {
+        const modal = document.getElementById('product-modal');
+        const closeBtn = document.getElementById('close-modal');
+        
+        if (modal && closeBtn) {
+            // Fechar modal
+            closeBtn.addEventListener('click', () => this.closeProductModal());
+            
+            // Fechar ao clicar no fundo
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.closeProductModal();
+                }
+            });
+            
+            // Controles de quantidade
+            const decreaseBtn = document.getElementById('decrease-qty');
+            const increaseBtn = document.getElementById('increase-qty');
+            const quantitySpan = document.getElementById('product-quantity');
+            
+            if (decreaseBtn && increaseBtn && quantitySpan) {
+                decreaseBtn.addEventListener('click', () => {
+                    const current = parseInt(quantitySpan.textContent);
+                    if (current > 1) {
+                        quantitySpan.textContent = current - 1;
+                    }
+                });
+                
+                increaseBtn.addEventListener('click', () => {
+                    const current = parseInt(quantitySpan.textContent);
+                    quantitySpan.textContent = current + 1;
+                });
+            }
+            
+            // Adicionar ao carrinho do modal
+            const addToCartBtn = document.getElementById('add-to-cart-modal');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', () => {
+                    this.handleAddToCartFromModal();
+                });
+            }
+            
+            console.log('🛒 Modal de produto configurado');
+        }
+        
+        // Configurar botões "Ver Detalhes" dos produtos
+        this.setupProductViewButtons();
+    }
+    
+    setupProductViewButtons() {
+        // Remover listeners existentes para evitar duplicatas
+        document.removeEventListener('click', this.handleProductViewClick);
+        
+        // Adicionar listener usando delegação de eventos
+        document.addEventListener('click', this.handleProductViewClick.bind(this));
+        
+        console.log('🔍 Event listeners dos botões "Ver Detalhes" configurados');
+    }
+    
+    handleProductViewClick(event) {
+        if (event.target.classList.contains('btn-view-product')) {
+            event.preventDefault();
+            
+            try {
+                const productData = JSON.parse(event.target.getAttribute('data-product'));
+                console.log('📦 Abrindo modal para produto:', productData);
+                this.openProductModal(productData);
+            } catch (error) {
+                console.error('❌ Erro ao processar dados do produto:', error);
+            }
+        }
+    }
+    
+    openProductModal(product) {
+        const modal = document.getElementById('product-modal');
+        const modalContent = modal.querySelector('.transform');
+        
+        if (modal) {
+            // Preencher dados do produto
+            this.fillProductModalData(product);
+            
+            // Mostrar modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Animar entrada
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            // Reinicializar ícones
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+    }
+    
+    closeProductModal() {
+        const modal = document.getElementById('product-modal');
+        const modalContent = modal.querySelector('.transform');
+        
+        if (modal) {
+            // Animar saída
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            modalContent.classList.remove('scale-100');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                
+                // Reset quantidade
+                const quantitySpan = document.getElementById('product-quantity');
+                if (quantitySpan) {
+                    quantitySpan.textContent = '1';
+                }
+            }, 300);
+        }
+    }
+    
+    fillProductModalData(product) {
+        // Preencher dados do produto no modal
+        const elements = {
+            image: document.getElementById('modal-product-image'),
+            name: document.getElementById('modal-product-name'),
+            price: document.getElementById('modal-product-price'),
+            oldPrice: document.getElementById('modal-product-old-price'),
+            discount: document.getElementById('modal-product-discount'),
+            description: document.getElementById('modal-product-description')
+        };
+        
+        if (elements.image) {
+            elements.image.src = product.image;
+            elements.image.alt = product.name;
+        }
+        
+        if (elements.name) {
+            elements.name.textContent = product.name;
+        }
+        
+        if (elements.price) {
+            elements.price.textContent = `R$ ${product.price}`;
+        }
+        
+        if (elements.oldPrice && product.oldPrice) {
+            elements.oldPrice.textContent = `R$ ${product.oldPrice}`;
+            elements.oldPrice.classList.remove('hidden');
+        } else if (elements.oldPrice) {
+            elements.oldPrice.classList.add('hidden');
+        }
+        
+        if (elements.discount && product.discount) {
+            elements.discount.textContent = product.discount;
+            elements.discount.classList.remove('hidden');
+        } else if (elements.discount) {
+            elements.discount.classList.add('hidden');
+        }
+        
+        if (elements.description) {
+            elements.description.textContent = product.description || 'Descrição não disponível.';
+        }
+    }
+    
+    handleAddToCartFromModal() {
+        const name = document.getElementById('modal-product-name').textContent;
+        const quantity = document.getElementById('product-quantity').textContent;
+        
+        // Atualizar contador do carrinho
+        this.updateCartCounter(parseInt(quantity));
+        
+        // Mostrar notificação
+        this.showNotification(`${quantity}x ${name} adicionado ao carrinho!`, 'success');
+        
+        // Fechar modal
+        this.closeProductModal();
     }
     
     // Event Handlers
@@ -375,11 +559,11 @@ class LumioApp {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     
-    updateCartCounter() {
+    updateCartCounter(quantity = 1) {
         const counter = document.querySelector('.shopping-cart span');
         if (counter) {
             const currentCount = parseInt(counter.textContent) || 0;
-            counter.textContent = currentCount + 1;
+            counter.textContent = currentCount + quantity;
             
             // Animação do contador
             counter.style.transform = 'scale(1.3)';

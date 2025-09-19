@@ -151,6 +151,39 @@ class ScrollAnimations {
         }
     }
     
+    // Método para reinicializar animações após mudanças no DOM
+    refresh() {
+        console.log('🔄 Reinicializando animações...');
+        
+        // Desconectar observer existente para evitar duplicatas
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+        
+        // Reinicializar completamente
+        this.setupObserver();
+        this.findElements();
+        this.observeElements();
+        
+        console.log(`✅ ${this.elements.length} elementos encontrados para animação`);
+        
+        // Forçar animação de elementos que já estão no viewport
+        this.checkVisibleElements();
+    }
+    
+    // Verificar e animar elementos que já estão visíveis
+    checkVisibleElements() {
+        this.elements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible && !element.classList.contains(this.options.visibleClass)) {
+                console.log('🎯 Animando elemento imediatamente visível');
+                this.animateElement(element);
+            }
+        });
+    }
+    
     // Animações específicas
     animateCounter(element, start = 0, end = 100, duration = 2000) {
         if (!element) return;
