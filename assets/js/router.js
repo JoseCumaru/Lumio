@@ -174,6 +174,12 @@ class Router {
                 console.log('🎨 Ícones Lucide reinicializados');
             }
             
+            // Carregar produtos dinamicamente para a seção produtos
+            if (window.app && typeof window.app.renderFeaturedProducts === 'function') {
+                await window.app.renderFeaturedProducts();
+                console.log('📦 Produtos em destaque carregados dinamicamente');
+            }
+            
             // Reinicializar animações de scroll para os novos elementos
             if (window.app && window.app.modules && window.app.modules.animations) {
                 // Aguardar um momento para o DOM se estabilizar
@@ -218,27 +224,12 @@ class Router {
     }
     
     setupProductsPage() {
-        // Configurar filtros de produtos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // Remover active de todos os botões
-                filterButtons.forEach(b => {
-                    b.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
-                    b.classList.add('text-gray-600', 'border-gray-300');
-                });
-                
-                // Adicionar active ao botão clicado
-                e.target.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
-                e.target.classList.remove('text-gray-600', 'border-gray-300');
-                
-                const filter = e.target.getAttribute('data-filter');
-                this.filterProducts(filter);
-            });
-        });
+        console.log('🛍️ Configurando página de produtos...');
         
-        // Carregar produtos
-        this.loadProducts();
+        // Carregar produtos dinamicamente
+        if (window.app && typeof window.app.renderAllProducts === 'function') {
+            window.app.renderAllProducts();
+        }
     }
     
     setupContactPage() {
@@ -250,60 +241,6 @@ class Router {
                 this.handleContactForm(form);
             });
         }
-    }
-    
-    async loadProducts() {
-        // Placeholder para carregar produtos - aqui você integraria com uma API
-        const productsGrid = document.getElementById('products-grid');
-        if (productsGrid) {
-            // Simular produtos por enquanto
-            productsGrid.innerHTML = `
-                <div class="product-card bg-white rounded-lg shadow-lg overflow-hidden group">
-                    <div class="product-image relative">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop" 
-                             alt="Relógio Clássico" 
-                             class="w-full h-64 object-cover">
-                        <button class="product-quick-view absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-semibold"
-                                data-product='{"id":1,"name":"Relógio Clássico","price":"199,90","oldPrice":"249,90","image":"https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop","description":"Um relógio elegante e sofisticado, perfeito para qualquer ocasião. Movimento suíço de alta precisão com resistência à água."}'>
-                            Visualização Rápida
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-semibold text-lg">Relógio Clássico</h3>
-                        <div class="flex items-baseline mt-2">
-                            <p class="text-xl font-bold text-indigo-600">R$ 199,90</p>
-                            <p class="text-sm text-gray-500 line-through ml-2">R$ 249,90</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Mais produtos seriam carregados aqui -->
-            `;
-            
-            // Configurar visualização rápida
-            this.setupQuickView();
-        }
-    }
-    
-    setupQuickView() {
-        const quickViewBtns = document.querySelectorAll('.product-quick-view');
-        quickViewBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const productData = JSON.parse(btn.getAttribute('data-product'));
-                this.openProductModal(productData);
-            });
-        });
-    }
-    
-    openProductModal(product) {
-        // Aqui integraremos com o modal de produto
-        if (window.app && window.app.openProductModal) {
-            window.app.openProductModal(product);
-        }
-    }
-    
-    filterProducts(filter) {
-        console.log(`🔍 Filtrando produtos por: ${filter}`);
-        // Implementar lógica de filtro aqui
     }
     
     async handleContactForm(form) {

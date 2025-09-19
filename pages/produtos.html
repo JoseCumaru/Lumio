@@ -27,116 +27,20 @@
             </div>
         </div>
         
-        <!-- Grid de produtos -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            
-            <!-- Produto 1 - Relógio Clássico -->
-            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group" data-category="acessorios">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop" 
-                         alt="Relógio Clássico" 
-                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-sm font-medium">-20%</span>
-                    </div>
-                    <button class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors">
-                        <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
-                    </button>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Relógio Clássico</h3>
-                    <p class="text-gray-600 text-sm mb-4">Relógio elegante e atemporal para todas as ocasiões</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <span class="text-xl font-bold text-gray-900">R$ 199,90</span>
-                            <span class="text-sm text-gray-500 line-through ml-2">R$ 249,90</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
-                            data-product='{"id": 1, "name": "Relógio Clássico", "price": 19990, "originalPrice": 24990, "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop", "description": "Relógio elegante e atemporal para todas as ocasiões. Feito com materiais de alta qualidade e design sofisticado.", "stock": 15}'>
-                        Ver Detalhes
-                    </button>
-                </div>
-            </div>
-
-            <!-- Produto 2 - Tênis Esportivo -->
-            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group" data-category="calcados">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" 
-                         alt="Tênis Esportivo" 
-                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-green-500 text-white px-2 py-1 rounded-full text-sm font-medium">Novo</span>
-                    </div>
-                    <button class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors">
-                        <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
-                    </button>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Tênis Esportivo</h3>
-                    <p class="text-gray-600 text-sm mb-4">Tênis de alta performance para suas atividades físicas</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <span class="text-xl font-bold text-gray-900">R$ 349,90</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
-                            data-product='{"id": 2, "name": "Tênis Esportivo", "price": 34990, "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop", "description": "Tênis de alta performance para suas atividades físicas. Conforto e durabilidade para atletas e entusiastas.", "stock": 23}'>
-                        Ver Detalhes
-                    </button>
-                </div>
-            </div>
-
-            <!-- Produto 3 - Headphone Premium -->
-            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group" data-category="eletronicos">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" 
-                         alt="Headphone Premium" 
-                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <button class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors">
-                        <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
-                    </button>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Headphone Premium</h3>
-                    <p class="text-gray-600 text-sm mb-4">Áudio de qualidade profissional com cancelamento de ruído</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <span class="text-xl font-bold text-gray-900">R$ 599,90</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
-                            data-product='{"id": 3, "name": "Headphone Premium", "price": 59990, "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop", "description": "Áudio de qualidade profissional com cancelamento de ruído. Ideal para música, trabalho e entretenimento.", "stock": 8}'>
-                        Ver Detalhes
-                    </button>
-                </div>
-            </div>
-
-            <!-- Produto 4 - Óculos de Sol -->
-            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group" data-category="acessorios">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop" 
-                         alt="Óculos de Sol" 
-                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <button class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors">
-                        <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
-                    </button>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Óculos de Sol</h3>
-                    <p class="text-gray-600 text-sm mb-4">Proteção UV com estilo moderno e sofisticado</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <span class="text-xl font-bold text-gray-900">R$ 149,90</span>
-                        </div>
-                    </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
-                            data-product='{"id": 4, "name": "Óculos de Sol", "price": 14990, "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop", "description": "Proteção UV com estilo moderno e sofisticado. Design único para todas as ocasiões.", "stock": 12}'>
-                        Ver Detalhes
-                    </button>
-                </div>
-            </div>
-
+        <!-- Loading placeholder -->
+        <div id="products-page-loading" class="text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <p class="mt-2 text-gray-600">Carregando produtos...</p>
+        </div>
+        
+        <!-- Container dinâmico para produtos -->
+        <div id="products-page-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 hidden">
+            <!-- Os produtos serão carregados dinamicamente aqui -->
+        </div>
+        
+        <!-- Error message -->
+        <div id="products-page-error" class="text-center py-8 hidden">
+            <p class="text-red-600">Erro ao carregar produtos. Tente novamente.</p>
         </div>
         
         <!-- Paginação -->

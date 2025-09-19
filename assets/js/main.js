@@ -598,6 +598,348 @@ class LumioApp {
         }, 3000);
     }
     
+    // Sistema de carregamento dinâmico de produtos
+    async loadProducts() {
+        try {
+            console.log('📦 Carregando produtos do JSON...');
+            
+            const response = await fetch('config/products.json');
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar produtos: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            return data.products;
+        } catch (error) {
+            console.error('❌ Erro ao carregar produtos:', error);
+            this.showProductsError();
+            return [];
+        }
+    }
+    
+    async renderFeaturedProducts() {
+        const loadingElement = document.getElementById('products-loading');
+        const gridElement = document.getElementById('products-grid');
+        const errorElement = document.getElementById('products-error');
+        
+        if (!gridElement) {
+            console.log('⚠️ Container de produtos não encontrado');
+            return;
+        }
+        
+        try {
+            // Mostrar loading
+            if (loadingElement) loadingElement.classList.remove('hidden');
+            if (errorElement) errorElement.classList.add('hidden');
+            if (gridElement) gridElement.classList.add('hidden');
+            
+            const products = await this.loadProducts();
+            const featuredProducts = products.filter(product => product.isFeatured);
+            
+            console.log(`✅ ${featuredProducts.length} produtos em destaque carregados`);
+            
+            // Limpar grid atual
+            gridElement.innerHTML = '';
+            
+            // Renderizar produtos
+            featuredProducts.forEach((product, index) => {
+                const productCard = this.createProductCard(product, index * 100);
+                gridElement.appendChild(productCard);
+            });
+            
+            // Ocultar loading e mostrar produtos
+            if (loadingElement) loadingElement.classList.add('hidden');
+            if (gridElement) gridElement.classList.remove('hidden');
+            
+            // Reinicializar animações e ícones
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+                if (window.app && window.app.modules && window.app.modules.animations) {
+                    window.app.modules.animations.refresh();
+                }
+            }, 100);
+            
+        } catch (error) {
+            console.error('❌ Erro ao renderizar produtos:', error);
+            this.showProductsError();
+        }
+    }
+    
+    createProductCard(product, delay = 0) {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card bg-white rounded-lg shadow-lg overflow-hidden group scroll-animate';
+        productCard.style.transitionDelay = `${delay}ms`;
+        
+        // Determinar imagem principal
+        const mainImage = this.getProductMainImage(product);
+        
+        // Formatação de preço
+        const price = this.formatPrice(product.price);
+        const originalPrice = product.originalPrice ? this.formatPrice(product.originalPrice) : null;
+        
+        // Badges
+        let badge = '';
+        if (product.isNew) {
+            badge = '<span class="new-badge absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>';
+        } else if (product.discount > 0) {
+            badge = `<span class="discount-badge absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">-${product.discount}%</span>`;
+        }
+        
+        // Preço original (se houver desconto)
+        const originalPriceHtml = originalPrice ? 
+            `<p class="text-sm text-gray-500 line-through ml-2">${originalPrice}</p>` : '';
+        
+        // Dados do produto para o modal (com múltiplas imagens se existirem)
+        const productData = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            originalPrice: product.originalPrice,
+            image: mainImage,
+            images: this.getProductImages(product),
+            description: product.description,
+            stock: product.stock,
+            category: product.category,
+            tags: product.tags
+        };
+        
+        productCard.innerHTML = `
+            <div class="product-image relative">
+                <img src="${mainImage}" 
+                     alt="${product.alt || product.name}" 
+                     class="w-full h-64 object-cover">
+                    }"
+                <div class="product-overlay absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold btn-hover transition-transform duration-300" 
+                            data-action="add-to-cart" 
+                            data-product-id="${product.id}"
+                            data-product-name="${product.name}">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+                ${badge}
+            </div>
+            <div class="p-6">
+                <h3 class="font-semibold text-lg">${product.name}</h3>
+                <div class="flex items-baseline mt-2 mb-4">
+                    <p class="text-xl font-bold text-indigo-600">${price}</p>
+                    ${originalPriceHtml}
+                </div>
+                <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
+                        data-product='${JSON.stringify(productData).replace(/'/g, "&apos;")}'>
+                    Ver Detalhes
+                </button>
+            </div>
+        `;
+        
+        return productCard;
+    }
+    
+    getProductMainImage(product) {
+        // Prioridade: image0, image, primeiro image* encontrado
+        if (product.image0) return product.image0;
+        if (product.image) return product.image;
+        
+        // Procurar por image1, image2, etc.
+        for (let i = 1; i <= 10; i++) {
+            if (product[`image${i}`]) {
+                return product[`image${i}`];
+            }
+        }
+        
+        // Fallback para uma imagem placeholder
+        return 'https://via.placeholder.com/300x300?text=Produto';
+    }
+    
+    getProductImages(product) {
+        const images = [];
+        
+        // Adicionar image principal
+        if (product.image) images.push(product.image);
+        
+        // Adicionar image0, image1, image2, etc.
+        for (let i = 0; i <= 10; i++) {
+            if (product[`image${i}`] && !images.includes(product[`image${i}`])) {
+                images.push(product[`image${i}`]);
+            }
+        }
+        
+        return images.length > 0 ? images : [this.getProductMainImage(product)];
+    }
+    
+    formatPrice(priceInCents) {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(priceInCents / 100);
+    }
+    
+    showProductsError() {
+        const loadingElement = document.getElementById('products-loading');
+        const gridElement = document.getElementById('products-grid');
+        const errorElement = document.getElementById('products-error');
+        
+        if (loadingElement) loadingElement.classList.add('hidden');
+        if (gridElement) gridElement.classList.add('hidden');
+        if (errorElement) errorElement.classList.remove('hidden');
+    }
+    
+    // Renderizar todos os produtos na página de produtos
+    async renderAllProducts() {
+        const container = document.getElementById('products-page-grid');
+        const loading = document.getElementById('products-page-loading');
+        const errorDiv = document.getElementById('products-page-error');
+        
+        if (!container) return;
+        
+        try {
+            // Mostrar loading
+            loading.classList.remove('hidden');
+            container.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+            
+            const products = await this.loadProducts();
+            
+            // Renderizar todos os produtos usando HTML strings
+            const productCardsHTML = products.map(product => this.createProductCardHTML(product)).join('');
+            container.innerHTML = productCardsHTML;
+            
+            // Esconder loading e mostrar produtos
+            loading.classList.add('hidden');
+            container.classList.remove('hidden');
+            
+            // Configurar filtros
+            this.setupProductFilters(products);
+            
+            // Refresh animations para novos elementos
+            if (window.scrollAnimations) {
+                window.scrollAnimations.refresh();
+            }
+            
+        } catch (error) {
+            console.error('Erro ao carregar produtos na página de produtos:', error);
+            loading.classList.add('hidden');
+            errorDiv.classList.remove('hidden');
+        }
+    }
+    
+    // Criar HTML de card de produto como string
+    createProductCardHTML(product) {
+        const mainImage = this.getProductMainImage(product);
+        const price = this.formatPrice(product.price);
+        const originalPrice = product.originalPrice ? this.formatPrice(product.originalPrice) : null;
+        
+        // Badges
+        let badge = '';
+        if (product.isNew) {
+            badge = '<span class="new-badge absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>';
+        } else if (product.discount > 0) {
+            badge = `<span class="discount-badge absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">-${product.discount}%</span>`;
+        }
+        
+        // Preço original (se houver desconto)
+        const originalPriceHtml = originalPrice ? 
+            `<p class="text-sm text-gray-500 line-through ml-2">${originalPrice}</p>` : '';
+        
+        // Dados do produto para o modal
+        const productData = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            originalPrice: product.originalPrice,
+            image: mainImage,
+            images: this.getProductImages(product),
+            description: product.description,
+            stock: product.stock,
+            category: product.category,
+            tags: product.tags
+        };
+        
+        return `
+            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group" data-category="${product.category}">
+                <div class="relative overflow-hidden">
+                    <img src="${mainImage}" 
+                         alt="${product.alt || product.name}" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="product-overlay absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-semibold btn-hover transition-transform duration-300" 
+                                data-action="add-to-cart" 
+                                data-product-id="${product.id}"
+                                data-product-name="${product.name}">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                    ${badge}
+                    <button class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors">
+                        <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">${product.name}</h3>
+                    <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-baseline">
+                            <span class="text-xl font-bold text-gray-900">${price}</span>
+                            ${originalPriceHtml}
+                        </div>
+                    </div>
+                    <button class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors btn-view-product" 
+                            data-product='${JSON.stringify(productData).replace(/'/g, "&apos;")}'>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Configurar filtros da página de produtos
+    setupProductFilters(products) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const filter = e.target.dataset.filter;
+                
+                // Atualizar estado ativo dos botões
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+                    btn.classList.add('border-gray-300', 'text-gray-600');
+                });
+                
+                e.target.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+                e.target.classList.remove('border-gray-300', 'text-gray-600');
+                
+                // Filtrar produtos
+                this.filterProducts(filter);
+            });
+        });
+    }
+    
+    // Filtrar produtos por categoria
+    filterProducts(category) {
+        const productCards = document.querySelectorAll('#products-page-grid .product-card');
+        
+        productCards.forEach(card => {
+            const productCategory = card.dataset.category;
+            
+            if (category === 'all' || productCategory === category) {
+                card.style.display = 'block';
+                card.classList.remove('opacity-0');
+                card.classList.add('opacity-100');
+            } else {
+                card.classList.remove('opacity-100');
+                card.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (card.classList.contains('opacity-0')) {
+                        card.style.display = 'none';
+                    }
+                }, 300);
+            }
+        });
+    }
+    
     // Método para destruir a aplicação (cleanup)
     destroy() {
         Object.values(this.modules).forEach(module => {
