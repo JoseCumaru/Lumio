@@ -2,7 +2,7 @@
 
 Uma loja online moderna e responsiva construída com HTML5, CSS3, JavaScript vanilla e Tailwind CSS.
 
-![Lumio](https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop)
+![Lumio](assets/images/lumio.png)
 
 
 
@@ -47,23 +47,6 @@ Uma loja online moderna e responsiva construída com HTML5, CSS3, JavaScript van
 
 ## 🔧 Desenvolvimento
 
-### Estrutura de Componentes
-
-Os componentes HTML são modulares e podem ser reutilizados:
-
-```html
-<!-- Exemplo de uso de componente -->
-<div id="header-container"></div>
-
-<script>
-// Carregar componente dinamicamente
-fetch('components/header.html')
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById('header-container').innerHTML = html;
-  });
-</script>
-```
 
 ### Configuração de Dados
 
@@ -74,29 +57,8 @@ Os dados são centralizados em arquivos JSON:
 fetch('config/products.json')
   .then(response => response.json())
   .then(products => {
-    // Renderizar produtos dinamicamente
     renderProducts(products);
   });
-```
-
-### Estilos CSS
-
-- **main.css**: Estilos base e utilitários
-- **components.css**: Estilos específicos de componentes
-- **responsive.css**: Media queries e responsividade
-
-### Módulos JavaScript
-
-Cada módulo tem responsabilidade específica:
-
-```javascript
-// Inicialização da aplicação
-const app = new LumioApp();
-
-// Módulos individuais
-const mobileMenu = new MobileMenu();
-const countdown = new CountdownTimer('countdown');
-const animations = new ScrollAnimations();
 ```
 
 ## 🎨 Customização
@@ -172,38 +134,6 @@ O projeto utiliza uma abordagem mobile-first com breakpoints:
 - Headers de segurança
 - HTTPS recomendado em produção
 
-## 🌐 SEO
-
-### Otimizações SEO
-
-- Meta tags otimizadas
-- Estrutura semântica HTML5
-- Alt text em imagens
-- URLs amigáveis
-- Schema markup (recomendado adicionar)
-
-## 🚀 Deploy
-
-### Opções de Hospedagem
-
-1. **Netlify** (Recomendado)
-   ```bash
-   npm run deploy
-   # Upload da pasta dist/
-   ```
-
-2. **Vercel**
-   ```bash
-   vercel --prod
-   ```
-
-3. **GitHub Pages**
-   ```bash
-   npm run deploy
-   git add dist/
-   git commit -m \"Deploy\"
-   git push origin gh-pages
-   ```
 
 ## 🧪 Testes
 
@@ -245,20 +175,5 @@ npm run test:coverage
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## 👨‍💻 Autor
-
-**Seu Nome**
-- Website: [https://seusite.com](https://seusite.com)
-- LinkedIn: [https://linkedin.com/in/seuperfil](https://linkedin.com/in/seuperfil)
-- Email: seu.email@exemplo.com
-
-## 🙏 Agradecimentos
-
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
-- [Lucide Icons](https://lucide.dev/) - Ícones SVG
-- [Unsplash](https://unsplash.com/) - Imagens de alta qualidade
-- Comunidade open source
-
----
 
 ⭐ Se este projeto te ajudou, considere dar uma estrela no repositório!
